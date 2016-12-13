@@ -1,6 +1,8 @@
 #!/bin/sh
 find -L data/ \
-	-name '*_nt.*.sam' \
-| sed -e 's#data/#results/#g' \
-	-e 's#_nt\..*\.sam#.merged_sorted.sam#g' \
+	-name '*_nt.*.bam' \
+| xargs -l basename \
+| sed -r \
+	-e 's#^#results/#g' \
+	-e 's#_nt\..*\.bam#.sorted.bam#g' \
 | sort -u
