@@ -1,0 +1,9 @@
+#!/bin/sh
+
+# This script takes a list of files in stdin
+# and outputs the header lines from all those files
+
+xargs -l \
+	-I '{}' \
+		sh -c "samtools view -H '{}' | ./header-without-sequences" \
+| sort -V -u
