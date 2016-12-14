@@ -4,5 +4,5 @@ find -L data/ \
 | xargs -l basename \
 | sed -r \
 	-e 's#^#results/#g' \
-	-e 's#_nt\..*\.bam#.sorted.bam#g' \
+	-e 's#_nt\..*\.bam#.merged.bam#g' \
 | sort -u

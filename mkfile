@@ -33,13 +33,5 @@ results/%.merged.bam:	results/%.merged.sam
 		-T $NT_REFERENCE \
 		"$prereq" \
 	> "$target"'.build' \
-	&& mv "$target"'.build' "$target"
-
-results/%.sorted.bam:	results/%.merged.bam
-	mkdir -p `dirname $target`
-	samtools sort \
-		-n \
-		-T 'results/'"$stem"'.tmp' \
-		"$prereq" \
-	> "$target"'.build' \
-	&& mv "$target"'.build' "$target"
+	&& mv "$target"'.build' "$target" \
+	&& rm "$prereq"
