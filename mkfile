@@ -22,13 +22,18 @@ merge_sort_sams:V:	$MERGE_SORT_TARGETS
 	> "$target"'.build' \
 	&& mv "$target"'.build' "$target"
 
-results/%.sorted.bam:	results/%.merged.sam
-	mkdir -p `dirname $target`
+
+results/%.merged.bam:	results/%.merged.sam
 	samtools view \
 		-b \
 		-T $NT_REFERENCE \
 		"$prereq" \
-	| samtools sort \
+	> "$target"'.build' \
+	&& mv "$target"'.build' "$target"
+
+results/%.sorted.bam:	results/%.merged.bam
+	mkdir -p `dirname $target`
+	samtools sort \
 		-n \
 		- \
 	> "$target"'.build' \
